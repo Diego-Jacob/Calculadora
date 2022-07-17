@@ -47,7 +47,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="bottom"
-        android:hint="= 579"
         android:textAlignment="textEnd"
         android:textAllCaps="false"
         android:textSize="60sp"
