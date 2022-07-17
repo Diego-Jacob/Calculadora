@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
 
         fun Teste ()
         {
-
+            println("Teste")
         }
     }
 }
