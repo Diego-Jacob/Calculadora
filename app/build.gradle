@@ -6,6 +6,11 @@ plugins {
 android {
     compileSdk 32
 
+    viewBinding
+    {
+    enabled = true
+    }
+
     defaultConfig {
         applicationId "br.kurtzz.com.impacta.calculadora"
         minSdk 26
