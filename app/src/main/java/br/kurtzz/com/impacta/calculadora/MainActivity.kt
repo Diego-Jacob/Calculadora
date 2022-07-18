@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity()
        var guardaVisor2: String = ""
        var v1: String = ""
        var v2: String = ""
+       var result: Double = 0.0
        var operacao: String = ""
        var contPonto: Int = 0
 
@@ -39,12 +40,13 @@ class MainActivity : AppCompatActivity()
        {
           when
            {
-              operacao == "+" -> println("Calculadora = ${calculadora(v1.toDouble(),v2.toDouble(), soma)}")
-              operacao == "-" -> println("Calculadora = ${calculadora(v1.toDouble(),v2.toDouble(), sub)}")
-              operacao == "*" -> println("Calculadora = ${calculadora(v1.toDouble(),v2.toDouble(), mult)}")
-              operacao == "/" -> println("Calculadora = ${calculadora(v1.toDouble(),v2.toDouble(), div)}")
-              operacao == "%" -> println("Calculadora = ${calculadora(v1.toDouble(),v2.toDouble(), percent)}")
+              operacao == "+" -> result = calculadora(v1.toDouble(),v2.toDouble(), soma)
+              operacao == "-" -> result = calculadora(v1.toDouble(),v2.toDouble(), sub)
+              operacao == "x" -> result = calculadora(v1.toDouble(),v2.toDouble(), mult)
+              operacao == "/" -> result = calculadora(v1.toDouble(),v2.toDouble(), div)
+              operacao == "%" -> result = calculadora(v1.toDouble(),v2.toDouble(), percent)
            }
+
        }
 
        fun digitaNumero (v1: String)
@@ -55,8 +57,14 @@ class MainActivity : AppCompatActivity()
 
         fun apagaNumero ()
         {
+           if (guardaString =="0.")
+           {
+               guardaString = ""
+           }
            guardaString = guardaString.dropLast(1)
            binding.Visor1.text = "${guardaString}"
+           if (guardaString == "") binding.Visor2.text = "$guardaVisor2"
+
         }
 
         fun apagaTudo()
@@ -67,6 +75,7 @@ class MainActivity : AppCompatActivity()
            v2 = ""
            operacao = ""
            contPonto = 0
+           result = 0.0
            binding.Visor1.text = guardaString
            binding.Visor2.text = guardaVisor2
         }
@@ -122,8 +131,60 @@ class MainActivity : AppCompatActivity()
             apagaTudo()
             true }
 
+        binding.Soma.setOnClickListener {
+            operacao = "+"
+            guardaVisor2 = guardaString + operacao
+            v1 = guardaString
+            guardaString = ""
+            binding.Visor1.text = "$guardaString"
+            binding.Visor2.text = "$guardaVisor2"
+        }
 
+        binding.Sub.setOnClickListener {
+            operacao = "-"
+            guardaVisor2 = guardaString + operacao
+            v1 = guardaString
+            guardaString = ""
+            binding.Visor1.text = "$guardaString"
+            binding.Visor2.text = "$guardaVisor2"
+        }
 
+        binding.Div.setOnClickListener {
+            operacao = "/"
+            guardaVisor2 = guardaString + operacao
+            v1 = guardaString
+            guardaString = ""
+            binding.Visor1.text = "$guardaString"
+            binding.Visor2.text = "$guardaVisor2"
+        }
+
+        binding.Mult.setOnClickListener {
+            operacao = "x"
+            guardaVisor2 = guardaString + operacao
+            v1 = guardaString
+            guardaString = ""
+            binding.Visor1.text = "$guardaString"
+            binding.Visor2.text = "$guardaVisor2"
+        }
+
+        binding.Percent.setOnClickListener {
+            operacao = "%"
+            guardaVisor2 = guardaString + operacao
+            v1 = guardaString
+            guardaString = ""
+            binding.Visor1.text = "$guardaString"
+            binding.Visor2.text = "$guardaVisor2"
+        }
+
+        binding.Igual.setOnClickListener {
+            v2 = guardaString
+            guardaVisor2 = guardaVisor2 + guardaString
+            retornaCalculo(operacao)
+            binding.Visor1.text = "= $result"
+            binding.Visor2.text = "$guardaVisor2"
+            guardaString = ""
+            guardaVisor2 = ""
+        }
 
     }
 }
